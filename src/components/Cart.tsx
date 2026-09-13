@@ -10,7 +10,7 @@ import { formatPrice } from "@/lib/utils";
 
 
 export default function Cart({liveCartId, isOpen, setIsOpen}: {liveCartId: string | null; isOpen: boolean; setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;}) {
-  const {cartData, loading, removeItem, updateQuantity} = useCart();
+  const {cartData, removeItem, updateQuantity} = useCart();
 
   const allCartItems = cartData?.lines?.edges || [];
 

@@ -56,11 +56,6 @@ export default function ProductClient({ product }: ShopifyProductType) {
   
   const currentActiveVariant = variantList.find((edge) => edge.node.title === selectedSize) || variantList[0];
   const price = currentActiveVariant?.node?.price;
-  // console.log(findMatchingVariant)
-  // console.log(hasMultipleSizes)
-  // console.log(variantList)
-
-  console.log(currentActiveVariant)
   const isSizeSelected = hasMultipleSizes ? selectedSize !== "" : true;
 
   const isOutOfStock = isSizeSelected && currentActiveVariant 
@@ -70,7 +65,6 @@ export default function ProductClient({ product }: ShopifyProductType) {
   const k1PreOrderPlanId = currentActiveVariant?.node?.sellingPlanAllocations?.nodes?.[0]?.sellingPlan?.id;
   const preOrderDescription = currentActiveVariant?.node?.sellingPlanAllocations?.nodes?.[0]?.sellingPlan?.description;
   
-  console.log(k1PreOrderPlanId)
   // Create options for select size dropdown
   const selectSizes = variantList.map((variant: ProductVariantType, index: number) => {
     const option = variant?.node?.title;
