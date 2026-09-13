@@ -37,12 +37,21 @@ export async function shopifyFetch<T>({ query, variables }: { query: string, var
 
 
 //Fetch Empty Cart
-export async function createShopifyCart(variantId: string, quantity = 1): Promise<ShopifyCartType> {
+export async function createShopifyCart(variantId: string, quantity = 1, sellingPlanId?: string): Promise<ShopifyCartType> {
+  const lineInput: any = {
+    merchandiseId: variantId,
+    quantity
+  };
+
+  if(sellingPlanId) {
+    lineInput.sellingPlanId = sellingPlanId;
+  };
+
   const response = await shopifyFetch<{ cartCreate: { cart: ShopifyCartType } }>({
     query: CREATE_CART_MUTATION,
     variables: {
       input: {
-        lines: [{ merchandiseId: variantId, quantity }]
+        lines: [lineInput]
       },
     },
   });
@@ -51,12 +60,21 @@ export async function createShopifyCart(variantId: string, quantity = 1): Promis
 }
 
 // Fetch add to cart mutation
-export async function addToShopifyCart(cartId:string, variantId: string, quantity = 1) {
+export async function addToShopifyCart(cartId:string, variantId: string, quantity = 1, sellingPlanId?: string) {
+  const lineInput: any = {
+    merchandiseId: variantId,
+    quantity
+  };
+
+  if(sellingPlanId) {
+    lineInput.sellingPlanId = sellingPlanId;
+  }
+
   const response = await shopifyFetch<{ cartLinesAdd: { cart: ShopifyCartType } }>({
     query: ADD_TO_CART_MUTATION,
     variables: {
       cartId,
-      lines: [{ merchandiseId: variantId, quantity }],
+      lines: [lineInput],
     },
   });
 

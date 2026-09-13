@@ -35,8 +35,22 @@ export const GET_PRODUCT_QUERY = `
           node {
             id
             title
-            price { amount currencyCode }
+            availableForSale
+            quantityAvailable
+            price { 
+              amount 
+              currencyCode 
             }
+            sellingPlanAllocations(first: 5) {
+              nodes {
+                sellingPlan {
+                  id
+                  name
+                  description
+                }
+              }
+            }
+          }
         }
       }
     }

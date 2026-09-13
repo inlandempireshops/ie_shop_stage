@@ -34,9 +34,19 @@ export const GET_SHOP_COLLECTION = `
             variants(first: 40) {
               edges {
                 node {
+                  id
+                  availableForSale
+                  quantityAvailable
                   price {
                     amount
                     currencyCode
+                  }
+                  sellingPlanAllocations(first: 1) {
+                    nodes {
+                      sellingPlan {
+                        id
+                      }
+                    }
                   }
                 }
               }

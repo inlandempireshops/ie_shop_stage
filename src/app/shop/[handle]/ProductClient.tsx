@@ -21,10 +21,23 @@ type ProductVariantType = {
   node: {
     id: string;
     title: string;
+    availableForSale?: boolean | null;
+    quantityAvailable?: number;
     price: {
       amount: string;
       currencyCode: string;
     };
+    sellingPlanAllocations?: {
+      nodes:
+        Array<{
+          sellingPlan: {
+            id: string;
+            name: string;
+            description: string | null;
+
+          }
+        }>
+    }
   }
 }
 
@@ -33,17 +46,31 @@ export default function ProductClient({ product }: ShopifyProductType) {
     notFound();
   };
 
-  const {addItem, loading} = useCart();
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
 
   const title = product.title;
   const mainProductImage = product.images?.edges[imageIndex]?.node;
-  const price = product.variants?.edges[0]?.node?.price;
-  const variantList = product.variants?.edges || [];
-  const findMatchingVariant = product.variants.edges.find((edge) => edge.node.title === selectedSize);
+  const variantList = (product.variants?.edges || []) as ProductVariantType[];
   const hasMultipleSizes = product.options[0]?.values && product.options[0].values.length > 0;
+  
+  const currentActiveVariant = variantList.find((edge) => edge.node.title === selectedSize) || variantList[0];
+  const price = currentActiveVariant?.node?.price;
+  // console.log(findMatchingVariant)
+  // console.log(hasMultipleSizes)
+  // console.log(variantList)
 
+  console.log(currentActiveVariant)
+  const isSizeSelected = hasMultipleSizes ? selectedSize !== "" : true;
+
+  const isOutOfStock = isSizeSelected && currentActiveVariant 
+    ? !currentActiveVariant.node.availableForSale || (currentActiveVariant.node.quantityAvailable !== undefined && currentActiveVariant.node.quantityAvailable <= 0) 
+    : false;
+  
+  const k1PreOrderPlanId = currentActiveVariant?.node?.sellingPlanAllocations?.nodes?.[0]?.sellingPlan?.id;
+  const preOrderDescription = currentActiveVariant?.node?.sellingPlanAllocations?.nodes?.[0]?.sellingPlan?.description;
+  
+  console.log(k1PreOrderPlanId)
   // Create options for select size dropdown
   const selectSizes = variantList.map((variant: ProductVariantType, index: number) => {
     const option = variant?.node?.title;
@@ -72,8 +99,6 @@ export default function ProductClient({ product }: ShopifyProductType) {
       </div>
     )
   });
-
-  const activeVariantId = findMatchingVariant?.node?.id || variantList[0]?.node?.id;
 
   return(
     <main id="main-product-content">
@@ -128,10 +153,18 @@ export default function ProductClient({ product }: ShopifyProductType) {
             </select>
             <IoMdArrowDropdown className="drop-arrow"/>
           </div>}
-
+          
+          {/* {
+            isOutOfStock && k1PreOrderPlanId && (
+              <p style={{ color: '#d97706', fontSize: '0.825rem', marginBlock: '8px', fontWeight: 500 }}>
+                ✦ {preOrderDescription || "Item available via pre-order."}
+              </p>
+            )
+          } */}
           <AddToCartButton 
-            variantId={activeVariantId}
-            disabled={hasMultipleSizes && !selectedSize}
+            variantId={isSizeSelected ? currentActiveVariant?.node?.id : undefined}
+            disabled={(hasMultipleSizes && !selectedSize) || (isOutOfStock && !k1PreOrderPlanId)}
+            sellingPlanId={isOutOfStock ? k1PreOrderPlanId : undefined}
           />
         </div>
       </div>

@@ -60,6 +60,10 @@ h3 {
   font-size: 1.25rem;
 }
 
+button:disabled {
+  opacity: .5
+}
+
 .back-to-link {
   display: flex;
   align-items: center;
@@ -480,6 +484,10 @@ main.main-hero-content {
   }
 }
 
+.shop-headline {
+  margin-bottom: 2rem;
+}
+
 .shop-hat-section {
   display: flex;
   flex-direction: column;
@@ -492,7 +500,7 @@ main.main-hero-content {
 .shop-hat-grid-container {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 6px;
+  gap: 2rem;
   width: 100%;
   aspect-ratio: 1.75/1;
 }
@@ -509,7 +517,8 @@ main.main-hero-content {
 .shop-hat-info {
   display: flex;
   flex-direction: column;
-  font-size: .75rem;
+  font-size: 1rem;
+  padding: 0 .5rem;
 }
 
 .shop-hat-title {
@@ -546,6 +555,7 @@ main.main-hero-content {
 
   .shop-hat-grid-container {
     grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
   }
 
   .shop-hat-info {

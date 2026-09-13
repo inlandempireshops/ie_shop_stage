@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BannerCarousel from "./components/BannerCarousel";
 import { shopifyFetch } from "@/lib/shopifyFetch";
-import { ShopifyProductType, ShopifyCollectionType } from "@/types/shopifyTypes";
+import { ShopifyCollectionType } from "@/types/shopifyTypes";
 import { GET_SHOP_COLLECTION } from "@/graphql/queries/shop";
 import { formatPrice } from "@/lib/utils";
 
@@ -27,6 +27,13 @@ export default async function ShopPage() {
     const price = hat.node.priceRange.maxVariantPrice;
     const productLink = hat.node.handle;
 
+    const isPreOrderProduct = hat.node.variants.edges.some((variantEdge) => {
+      const variant = variantEdge.node;
+      const isOutOfStock = !variant.availableForSale || (variant.quantityAvailable !== undefined && variant.quantityAvailable <= 0);
+      const hasPreOrderPlan = (variant.sellingPlanAllocations?.nodes?.length ?? 0) > 0;
+      return isOutOfStock && hasPreOrderPlan;
+    });
+    
     return(
       <div
         className="shop-hat-container" 
@@ -36,6 +43,13 @@ export default async function ShopPage() {
           href={`shop/${productLink}`}
           className="shop-hat-image-container"
         >
+          {
+            isPreOrderProduct && (
+              <div style={{ position: 'absolute', top: '8px', left: '8px', backgroundColor: '#d97706', color: '#fff', padding: '4px 8px', fontSize: '11px', fontWeight: 'bold', zIndex: 10, borderRadius: '4px' }}>
+                Pre-Order
+              </div>
+            )
+          }
           <Image
             src={images.url}
             alt={images.altText}

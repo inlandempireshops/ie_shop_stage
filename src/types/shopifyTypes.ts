@@ -14,6 +14,7 @@ export type ShopifyVariantType = {
   id: string;
   title: string;
   availableForSale?: boolean | null;
+  quantityAvailable?: number;
   price: { 
     amount: string;
     currencyCode: string;
@@ -21,8 +22,18 @@ export type ShopifyVariantType = {
   compareAtPrice?: {
     amount: string;
     currencyCode: string;
-  } | null
+  } | null;
+  sellingPlanAllocations?: {
+   nodes: Array<{
+    sellingPlan: {
+      id: string;
+      name: string;
+      description: string | null;
+    }
+   }>
+  };
 };
+
 
 export type ShopifyProductType = {
   product: ShopifyProductFieldsType | null;
@@ -110,6 +121,12 @@ export type ShopifyCartLineType = {
       title: string;
     };
   };
+  sellingPlanAllocation?: {
+    sellingPlan: {
+      name: string;
+      description: string | null;
+    }
+  } | null;
   quantity: number;
   cost: {
     totalAmount: {

@@ -5,19 +5,22 @@ import { useCart } from "./CartContext";
 type AddToCartProps = {
   variantId: string | undefined;
   disabled?: boolean;
+  sellingPlanId?: string;
 };
 
-export default function AddToCartButton({ variantId, disabled }: AddToCartProps) {
+export default function AddToCartButton({ variantId, disabled, sellingPlanId}: AddToCartProps) {
   const {addItem, loading} = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [success, setSucces] = useState(false);
+
+  const isPreOrder = !!sellingPlanId;
 
   const handleAddToCartClick = async () => {
     if(!variantId) return;
 
     setIsAdding(true);
     try {
-      await addItem(variantId);
+      await addItem(variantId, sellingPlanId);
       setSucces(true);
       
       setTimeout(() => {
@@ -31,13 +34,21 @@ export default function AddToCartButton({ variantId, disabled }: AddToCartProps)
     }
   };
   
+  const getButtonText = () => {
+    if(isAdding) return "Adding...";
+    if(success) return isPreOrder ? "✓ Pre-Ordered" : "✓ Added!";
+    if(disabled && !variantId) return "Select Option";
+    if(disabled) return "Out of Stock";
+    return isPreOrder ? "Pre-Order Now" : "Add to Cart";
+  };
+
   return(
     <button 
       className={`add-to-cart ${success ? "bg-green-600" : ""}`}
       onClick={handleAddToCartClick}
       disabled={isAdding || disabled || !variantId}
     >
-      {isAdding ? "Adding..." : success ? "✓ Added!" : "Add to Cart"}
+      {getButtonText()}
     </button>
   )
 };

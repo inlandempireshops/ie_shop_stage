@@ -9,7 +9,7 @@ type CartContextType = {
   cartId: string | null;
   cartData: LiveCartResponseType | null;
   loading: boolean;
-  addItem: (variantId: string) => Promise<void>;
+  addItem: (variantId: string, sellingPlanId?: string) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
   updateQuantity: (lineId: string, currentQuantity: number, action: "increase" | "decrease") => Promise<void>;
 }
@@ -44,14 +44,15 @@ export default function CartContextProvider({ children }: {children: ReactNode})
     }
   }, [cartId])
 
+
   // Add new item
-  const addItem = async (variantId: string) => {
+  const addItem = async (variantId: string, sellingPlanId?: string) => {
     setLoading(true);
     try {
       const activeCartId = cartId || localStorage.getItem("cart_id");
 
       if(!activeCartId) {
-        const newCart = await createShopifyCart(variantId);
+        const newCart = await createShopifyCart(variantId, 1, sellingPlanId);
         setCartId(newCart.id);
         localStorage.setItem("cart_id", newCart.id);
 
@@ -61,7 +62,7 @@ export default function CartContextProvider({ children }: {children: ReactNode})
         return;
       } else {
         //Add item to existing cart
-        await addToShopifyCart(activeCartId, variantId);
+        await addToShopifyCart(activeCartId, variantId, 1, sellingPlanId);
 
         // Fetch updated existing cart
         const updatedCartData = await getLiveCart(activeCartId);
@@ -75,6 +76,7 @@ export default function CartContextProvider({ children }: {children: ReactNode})
       setLoading(false);
     }
   };
+
 
   // Remove Item from cart
   const removeItem = async (lineId: string) => {

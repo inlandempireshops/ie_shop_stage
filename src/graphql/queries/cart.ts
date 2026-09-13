@@ -29,6 +29,12 @@ export const GET_CART_QUERY = `
                 }
               }
             }
+            sellingPlanAllocation {
+              sellingPlan {
+                name
+                description
+              }
+            }
             quantity
             cost {
               totalAmount {
