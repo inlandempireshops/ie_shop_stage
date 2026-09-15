@@ -126,30 +126,6 @@ footer {
   }
 }
 
-@keyframes fadeOutSplash {
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: .5;
-  }
-
-  0% {
-    opacity: 0;
-  }
-}
-
-@keyframes shrinkSplash {
-  0% {
-    height: 30svh
-  }
-
-  100% {
-    height: 15svh;
-  }
-}
-
 @keyframes fadeButtons {
   0% {
     opacity: 0;
@@ -194,15 +170,13 @@ main.main-hero-content {
   gap: 2rem;
   z-index: 2;
   
-  transform: translateY(0);
-  transition: transform 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
-.splash-mode #hero-content-container {
-  transform: translateY(-2svh); 
-}
-
-.hero-mode #hero-content-container {
+.content-visible #hero-content-container {
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -237,16 +211,27 @@ main.main-hero-content {
 
 .splash-image-container {
   position: relative;
-  height: 30svh;
+  height: 40svh;
   width: 100%;
   z-index: 1;
+  opacity: 1;
   visibility: visible;
+
+  transition: height 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.8s ease, 
+              visibility 0.8s ease;
+
 }
 
 .hero-mode .splash-image-container {
   opacity: 0;
   visibility: hidden;
-  height: 0vh;
+  height: 0svh;
+
+  transition-property: opacity, height, visibility;
+  transition-duration: 0.4s, 0.8s, 0.8s;
+  transition-delay: 0s, 0.4s, 0.4s;
+  transition-timing-function: ease-out, cubic-bezier(0.25, 1, 0.5, 1), ease;
 }
 
 .splash-image {
@@ -256,33 +241,22 @@ main.main-hero-content {
   width: 100%;
 }
 
-@keyframes fadeOutSplash {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 .home-buttons {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  min-width: 100%;
-  z-index: 1;
-  
+  z-index: 2;
+  position: relative;
+
   opacity: 0;
-  visibility: hidden;
-  transform: translateY(15px);
+  animation: cleanFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1)  0.4s forwards;
 }
 
-.hero-mode .home-buttons {
-  display: flex;
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+@keyframes cleanFadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
 .link-btn {
@@ -328,13 +302,6 @@ main.main-hero-content {
   .link-btn {
     font-size: 1.55rem;
   }
-}
-
-.home-buttons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
 }
 
 

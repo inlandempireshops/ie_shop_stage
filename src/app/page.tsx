@@ -7,17 +7,31 @@ import splashImage from "~/public/images/splash-image.png";
 
 export default function Home() {
   const [isSplashActive, setIsSplashActive] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+  const [mountButtons, setMountButtons] = useState(false);
 
   useEffect(() => {
+    const contentTimer = setTimeout(() => {
+      setShowContent(true);
+    }, 2000);
+
     const splashTimer = setTimeout(() => {
       setIsSplashActive(false);
     }, 3000);
 
-    return () => clearTimeout(splashTimer);
+    const buttonTimer = setTimeout(() => {
+      setMountButtons(true);
+    }, 3400);
+
+    return () => {
+      clearTimeout(contentTimer);
+      clearTimeout(splashTimer);
+      clearTimeout(buttonTimer);
+    };
   }, []);
 
   return (
-    <main className={`main-hero-content ${isSplashActive ? "splash-mode" : "hero-mode" }`}>
+    <main className={`main-hero-content ${isSplashActive ? "splash-mode" : "hero-mode" } ${showContent ? "content-visible" : ""}`}>
       <section id="hero">
         <div id="hero-content-container">
           <div id="hero-logo-container">
@@ -37,7 +51,7 @@ export default function Home() {
           </p>
         </div>
         <div className="bottom-container">
-          { isSplashActive ? <div className="splash-image-container">
+          <div className="splash-image-container">
             <Image 
               src={splashImage}
               alt="image of splash model"
@@ -46,8 +60,9 @@ export default function Home() {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
-          </div> : 
-          <div className="home-buttons">
+          </div>
+
+          {mountButtons && (<div className="home-buttons">
             <Link 
               href={`/shop`}
               id="shop-btn" 
@@ -62,7 +77,7 @@ export default function Home() {
             >
               Contact
             </Link>
-          </div>}
+          </div>)}
         </div>
       </section>
     </main>
