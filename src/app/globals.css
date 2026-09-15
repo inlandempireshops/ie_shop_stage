@@ -703,6 +703,7 @@ main.main-hero-content {
   align-items: center;
   aspect-ratio: 6 / 1;
   font-size: 1.25rem;
+  cursor: pointer;
 }
 
 .sizes-dropdown {
@@ -725,7 +726,6 @@ main.main-hero-content {
   background-color: #171717;
   color: #ededed;
 }
-
 
 .drop-arrow {
   color: #171717;
