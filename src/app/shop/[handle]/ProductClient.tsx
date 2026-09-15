@@ -148,18 +148,19 @@ export default function ProductClient({ product }: ShopifyProductType) {
             <IoMdArrowDropdown className="drop-arrow"/>
           </div>}
           
-          {
-            isOutOfStock && k1PreOrderPlanId && (
-              <p style={{ color: '#d97706', fontSize: '0.825rem', marginBlock: '8px', fontWeight: 500 }}>
-                ✦ {preOrderDescription || "Item available via pre-order."}
-              </p>
-            )
-          }
           <AddToCartButton 
             variantId={isSizeSelected ? currentActiveVariant?.node?.id : undefined}
             disabled={(hasMultipleSizes && !selectedSize) || (isOutOfStock && !k1PreOrderPlanId)}
             sellingPlanId={isOutOfStock ? k1PreOrderPlanId : undefined}
           />
+
+          {
+            isOutOfStock && k1PreOrderPlanId && (
+              <p className="preorder-message">
+                ✦ {preOrderDescription || "Item available via pre-order."}
+              </p>
+            )
+          }
         </div>
       </div>
     </main>

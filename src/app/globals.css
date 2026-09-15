@@ -676,10 +676,12 @@ main.main-hero-content {
 .product-page-btns {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
   gap: 1rem;
   order: 3;
+  margin-top: 2rem;
 }
 
 .sizes-container, .add-to-cart {
@@ -724,6 +726,7 @@ main.main-hero-content {
   color: #ededed;
 }
 
+
 .drop-arrow {
   color: #171717;
   position: absolute;
@@ -733,6 +736,13 @@ main.main-hero-content {
   right: 16px;
   z-index: 0;
 }
+
+.preorder-message {
+  color: #d97706;
+  font-size: 0.825rem;
+  font-weight: 500;
+}
+
 
 @media screen and (min-width: 768px) {
   .product-container {
@@ -799,13 +809,13 @@ main.main-hero-content {
   .product-page-btns {
     flex-direction: column;
     justify-content: end;
-    align-content: end;
     position: absolute;
     top: 8rem;
   }
 
   .sizes-container, 
-  .add-to-cart {
+  .add-to-cart,
+  .preorder-message {
     width: 65%;
   }
 }
