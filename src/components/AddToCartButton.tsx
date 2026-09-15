@@ -36,7 +36,7 @@ export default function AddToCartButton({ variantId, disabled, sellingPlanId}: A
   
   const getButtonText = () => {
     if(isAdding) return "Adding...";
-    if(success) return isPreOrder ? "✓ Pre-Ordered" : "✓ Added!";
+    if(success) return isPreOrder ? "✓ Added to Cart" : "✓ Added!";
     if(disabled && !variantId) return "Select Option";
     if(disabled) return "Out of Stock";
     return isPreOrder ? "Pre-Order Now" : "Add to Cart";
