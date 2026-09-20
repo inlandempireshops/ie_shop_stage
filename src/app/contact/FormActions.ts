@@ -1,38 +1,64 @@
 "use server";
+import { z } from "zod";
+import { Resend } from "resend";
+
+// zod schema
+const contactSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required.").max(50, "Name too long."),
+  lastName: z.string().trim().min(1, "Last name is required.").max(50, "Name too long."),
+  email: z.string().trim().max(100, "Email cannont exceed 100 characters.").pipe(
+    z.email("Please enter a valid email address")
+  ),
+  message: z.string().trim().min(10, "Message must be at least 10 characters.").max(5000)
+});
+
+// Iniitalize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendContactEmail(prevState: any, formData: FormData) {
-  const firstName = formData.get("contact-first-name") as string
-  const lastName = formData.get("contact-last-name") as string
-  const email = formData.get("contact-email") as string
-  const message = formData.get("message") as string
+  
+  const rawFields = {
+    firstName: formData.get("contact-first-name") as string,
+    lastName: formData.get("contact-last-name") as string,
+    email: formData.get("contact-email") as string,
+    message: formData.get("contact-message") as string
+  } 
 
-  if(!firstName || !lastName || !email || !message) {
-    return {
-      success: false, 
-      error: "All fields are required."
-    }
-  };
+  const validatedFields = contactSchema.safeParse(rawFields);
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailRegex.test(email)) {
+  if(!validatedFields.success) {
+    const flattened = z.flattenError(validatedFields.error);
+    const fieldErrors = flattened.fieldErrors;
+
     return {
       success: false,
-      error: "Please enter a valid email address."
-    }
-  }
+      error: Object.values(fieldErrors).flat()[0] || "Invalid form data.",
+    };
+  };
 
-  console.log(email);
+  const { firstName, lastName, email, message } = validatedFields.data;
 
   try {
+     
+    await resend.emails.send({
+      from: "Contact Form <onboarding@resend.dev>",
+      to: "dadigwu@gmail.com",
+      subject: `New E-Commerce Message ${firstName} ${lastName}`,
+      text: `Sender: ${firstName} ${lastName} (${email}) \n\nMessage:\n${message}`,
+    });
+
     return {
       success: true,
       error: null
     }
+    
   } catch(err) {
     console.error("Failed to send message:", err);
     return {
       success: false,
-      error: "Error occurred please try again later."
+      fallbackToMailto: true,
+      error: null,
+      validatedData: { firstName, lastName, email, message }
     }
   }
 }

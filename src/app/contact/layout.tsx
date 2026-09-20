@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 
 export default function ContactLayout({ children }: { children: React.ReactNode }): React.JSX.Element {
@@ -10,7 +9,6 @@ export default function ContactLayout({ children }: { children: React.ReactNode 
       <div className="layout-wrapper">
         {children}
       </div>
-      <Footer />
     </div>
   )
 }

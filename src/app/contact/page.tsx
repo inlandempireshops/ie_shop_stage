@@ -1,44 +1,71 @@
 "use client"
-import React, { JSX, useActionState, useState } from "react";
+import React, { JSX, useActionState, useState, startTransition, useEffect } from "react";
 import { sendContactEmail } from "./FormActions";
 
 export default function Contact(): JSX.Element {
   const [clientError, setClientError] = useState<string | null>(null)
-  const [state, formAction, isPending] = useActionState(sendContactEmail, {
+  const [state, formAction, isPending] = useActionState(sendContactEmail as (prevState: any, formData: FormData) => Promise<any>, {
     success: false,
+    fallbackToMailto: false,
     error: null,
   });
 
-  const checkFormSubmission = (event: React.SubmitEvent<HTMLFormElement>) => {
-    setClientError(null);
-    const formData = new FormData(event.currentTarget);
-    const firstName = formData.get("contact-first-name") as string;
-    const lastName = formData.get("contact-last-name") as string;
-    const email = formData.get("contact-email") as string;
-    const message = formData.get("contact-message") as string;
 
-    if(!firstName.trim() || !lastName.trim() || !email.trim() || !message.trim()) {
-      event.preventDefault();
-      setClientError("Please fill out all form fields.");
-      return;
-    };
+  useEffect(() => {
+    if (state.fallbackToMailto && state.validatedData) {
+      const { firstName, lastName, email, message } = state.validatedData;
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(!emailRegex.test(email)) {
-      event.preventDefault();
-      setClientError("Please enter a valid email address.");
-      return;
+      const yourInbox = "dadigwu@gmail.com";
+      const subject = encodeURIComponent(`New E-Commerce Message ${firstName} ${lastName}`);
+      const body = encodeURIComponent(
+        `Hi, our messaging server was busy, so this notification is routing natively!\n\n` +
+        `Sender: ${firstName} ${lastName} (${email})\n\n` +
+        `Message:\n${message}`
+      );
+
+      // Instantly open the client's local app with their form inputs pre-filled
+      window.location.href = `mailto:${yourInbox}?subject=${subject}&body=${body}`;
     }
+  }, [state.fallbackToMailto, state.validatedData]);
+
+
+  const checkFormSubmission = (event: React.SubmitEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setClientError(null);
+
+    const formData = new FormData(event.currentTarget);
+
+    // Pass data to the backend
+    const currentForm = event.currentTarget;
+    startTransition(() => {
+      formAction(new FormData(currentForm));
+    });
   }
 
   return(
     <div className="contact-container">
-      <div className="contact-banner"></div>
-
       <section id="contact-form-container">
         <h2 className="contact-headline">Contact Us</h2>
         
-        <form action={formAction} className="contact-form">
+        <form onSubmit={checkFormSubmission} className="contact-form">
+          {(clientError || state.error) && (
+            <div className="error-banner" style={{ color: "red", marginBottom: "1rem" }}>
+              {clientError || state.error}
+            </div>
+          )}
+
+          {state.success && (
+            <div className="success-banner" style={{ color: "green", marginBottom: "1rem" }}>
+              Message Sent Successfully!
+            </div>
+          )}
+          
+          {state.fallbackToMailto && (
+            <div className="warning-banner" style={{ color: "orange", marginBottom: "1rem" }}>
+              ✉ Routing message through your local email application. Please hit "Send" in the window that opened!
+            </div>
+          )}
+          
           <div className="name-container form-data-containers">
             <div className="first-name-container">
               <label htmlFor="contact-first-name">First Name</label>
@@ -67,6 +94,8 @@ export default function Contact(): JSX.Element {
           </button>
         </form>
       </section>
+      
+      <div className="contact-banner"></div>
     </div>
   )
 }
