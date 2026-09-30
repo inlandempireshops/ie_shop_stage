@@ -140,7 +140,9 @@ footer {
 .layout-wrapper {
   height: calc(100svh - 16rem);
   min-height: fit-content;
-  width: 100svw;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 /****
@@ -386,8 +388,7 @@ main.main-hero-content {
   position: relative;
   display: flex;
   height: 70svh;
-  width: 100dvw;
-  overflow: hidden;
+  width: 100%;
   font-family: var(--font-birthstone);
 }
 
@@ -424,9 +425,11 @@ main.main-hero-content {
   display: flex;
   justify-content: space-between;
   position: absolute;
-  width: 100%;
   height: fit-content;
+  width: 100%;
   top: 50%;
+  left: 0;
+  right: 0;
   transform: translateY(-50%);
 }
 
@@ -471,7 +474,7 @@ main.main-hero-content {
   grid-template-columns: 1fr;
   gap: 2rem;
   width: 100%;
-  aspect-ratio: 1.75/1;
+  aspect-ratio: 1/1;
 }
 
 .shop-hat-container {
@@ -516,15 +519,8 @@ main.main-hero-content {
     font-size: 2rem;
   }
 
-  .shop-hat-section {
-    min-height: 60svh;
-    height: fit-content;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .shop-hat-grid-container {
     grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
   }
 
   .shop-hat-info {
@@ -532,14 +528,20 @@ main.main-hero-content {
   }
 }
 
+
 @media (min-aspect-ratio: 16/9) {
   .shop-banner {
     height: 100svh;
   }
 
+  .shop-hat-section {
+    padding-block: 4rem;
+  }
+
   .shop-hat-grid-container {
-    width: 70%;
-    aspect-ratio: 2/1;
+    grid-template-columns: repeat(3, 1fr);
+    aspect-ratio: 3/1;
+    gap: 1rem;
   }
 
   .banner-image {
@@ -568,10 +570,6 @@ main.main-hero-content {
 
   #banner-image-6 {
     object-position: center 5%;
-  }
-
-  .shop-hat-section {
-    padding-block: 4rem;
   }
 
 }
