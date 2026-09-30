@@ -120,7 +120,9 @@ export default function ProductClient({ product }: ShopifyProductType) {
               alt={mainProductImage.altText}
               className="product-main-image"
               fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={true}
+              loading="eager"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1600vw"
             />
           </div>
           <div className="product-variant-image-grid">

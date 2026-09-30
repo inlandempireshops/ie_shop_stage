@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { RootLayoutProps } from "@/types/localTypes";
 import "./globals.css";
+import "./error.css";
 import { Birthstone } from "next/font/google";
 import CartContextProvider from "@/components/CartContext";
 

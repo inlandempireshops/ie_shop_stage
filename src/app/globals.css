@@ -652,6 +652,7 @@ main.main-hero-content {
 .variant-images:active,
 .variant-images:focus {
   border: 2px solid #171717;
+  border-radius: 4px;
 }
 
 .product-info {
@@ -751,8 +752,8 @@ main.main-hero-content {
     gap: 2rem;
   }
 
-  .product-image-container {
-    width: 100%;
+  .product-content-card-container {
+    gap: 2rem;
   }
   
   .product-title {
@@ -780,6 +781,7 @@ main.main-hero-content {
 
   .product-content-card-container {
     width: 50%;
+    gap: 1rem;
   }
 
   .product-info, 
@@ -793,20 +795,6 @@ main.main-hero-content {
     top: 2rem;
   }
 
-  .product-image-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: 4px;
-  }
-
-  .product-main-image {
-    object-fit: cover;
-    object-position: center;
-    height: 100%;
-    width: 100%;
-  }
 
   .product-page-btns {
     flex-direction: column;
