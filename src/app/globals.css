@@ -383,13 +383,16 @@ main.main-hero-content {
 /****
   SHOP PAGE
 ****/
-
 .shop-banner {
   position: relative;
   display: flex;
   height: 70svh;
   width: 100%;
   font-family: var(--font-birthstone);
+}
+
+.desktop-view-banner {
+  display: none;
 }
 
 /* The horizontal track sliding left and right */
@@ -417,10 +420,6 @@ main.main-hero-content {
   width: 100%;
 }
 
-#banner-image-6 {
-  object-position: center 15%;
-}
-
 .carousel-btn-container {
   display: flex;
   justify-content: space-between;
@@ -446,13 +445,28 @@ main.main-hero-content {
     height: 80svh;
   }
 
-  #banner-image-6 {
-    object-position: center 15%;
-  }
-
   .banner-next-slide, 
   .banner-prev-slide {
     font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .mobile-view-banner {
+    display: none;
+  }
+
+  .desktop-view-banner {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .images-container {
+    position: relative;
+    width: 50%;
+    min-width: 50%;
+    height: 100%;
   }
 }
 
@@ -547,31 +561,6 @@ main.main-hero-content {
   .banner-image {
     object-position: center 30%;
   }
-
-  #banner-image-1 {
-    object-position: center 30%;
-  }
-
-  #banner-image-2 {
-    object-position: center 32.5%;
-  }
-
-  #banner-image-3 {
-    object-position: center 20%;
-  }
-
-  #banner-image-4 {
-    object-position: center 30%;
-  }
-
-  #banner-image-5 {
-    object-position: center 30%;
-  }
-
-  #banner-image-6 {
-    object-position: center 5%;
-  }
-
 }
 
 
