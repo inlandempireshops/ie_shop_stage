@@ -84,7 +84,7 @@ export default function BannerCarousel({ autoSlide = 3000 }) {
           src={image.src}
           alt={image.alt}
           className="banner-image"
-          fill
+          loading="eager"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>

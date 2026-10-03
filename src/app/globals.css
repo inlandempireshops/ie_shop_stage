@@ -440,35 +440,6 @@ main.main-hero-content {
   cursor: pointer;
 }
 
-@media screen and (min-width: 768px) {
-  .shop-hat-banner {
-    height: 80svh;
-  }
-
-  .banner-next-slide, 
-  .banner-prev-slide {
-    font-size: 3rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .mobile-view-banner {
-    display: none;
-  }
-
-  .desktop-view-banner {
-    display: flex;
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .images-container {
-    position: relative;
-    width: 50%;
-    min-width: 50%;
-    height: 100%;
-  }
-}
 
 .shop-headline {
   margin-bottom: 2rem;
@@ -529,6 +500,15 @@ main.main-hero-content {
 }
 
 @media screen and (min-width: 768px) {
+  .shop-hat-banner {
+    height: 80svh;
+  }
+
+  .banner-next-slide, 
+  .banner-prev-slide {
+    font-size: 3rem;
+  }
+  
   .shop-headline {
     font-size: 2rem;
   }
@@ -542,10 +522,9 @@ main.main-hero-content {
   }
 }
 
-
-@media (min-aspect-ratio: 16/9) {
+@media screen and (min-width: 1024px) {
   .shop-banner {
-    height: 100svh;
+    height: 120svh;
   }
 
   .shop-hat-section {
@@ -560,6 +539,23 @@ main.main-hero-content {
 
   .banner-image {
     object-position: center 30%;
+  }
+
+  .mobile-view-banner {
+    display: none;
+  }
+
+  .desktop-view-banner {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .images-container {
+    position: relative;
+    width: 50%;
+    min-width: 50%;
+    height: 100%;
   }
 }
 
