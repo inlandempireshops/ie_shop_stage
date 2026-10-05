@@ -1,8 +1,8 @@
 import { CarouselImages } from "@/types/localTypes";
 import davisDark from "~/public/images/davisDark.jpeg";
 import soniaDark from "~/public/images/soniaDark.jpeg";
-import soniaLight from "~/public/images/soniaLight.jpeg";
-import silasLight from "~/public/images/silasLight.jpeg";
+import soniaLight from "~/public/images/soniaLight2.jpeg";
+import silasLight from "~/public/images/silasLight2.jpeg";
 
 export const bannerImages: CarouselImages[] = [
   {
