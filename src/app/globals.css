@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #141414;
   font-size: 16px;
 }
 
@@ -49,7 +49,7 @@ h1, h2, h3 {
 h1 {
   font-family: var(--font-birthstone);
   font-size: 2rem;
-  color: #171717;
+  color: #141414;
 }
 
 h2 {
@@ -151,7 +151,7 @@ footer {
 main.main-hero-content {
   display: flex;
   justify-content: center;
-  background-color: #171717;
+  background-color: #141414;
   overflow: hidden;
   height: 100svh;
   width: 100svw;
@@ -280,13 +280,13 @@ main.main-hero-content {
 .link-btn:hover {
   background-color: #ededed;
   transition: all 0.6s ease-in-out;
-  color: #171717;
+  color: #141414;
   cursor: pointer;
 }
 
 @media (hover: none) {
   .link-btn:active {
-    background-color: #171717;
+    background-color: #141414;
     color: #ededed;
     transition: all 0.6s ease-in-out;
   }
@@ -323,7 +323,7 @@ main.main-hero-content {
   height: 5em;
   width: 100%;
   z-index: 1;
-  background-color: #171717;
+  background-color: #141414;
   border-bottom: 1px solid #ededed;
 }
 
@@ -355,7 +355,7 @@ main.main-hero-content {
   height: 1rem;
   font-size: .675rem;
   background-color: #ededed;
-  color: #171717;
+  color: #141414;
 }
 
 @media screen and (min-width: 768px) {
@@ -457,7 +457,6 @@ main.main-hero-content {
   grid-template-columns: 1fr;
   gap: 2rem;
   width: 100%;
-  aspect-ratio: 1/1;
 }
 
 .shop-hat-container {
@@ -641,7 +640,7 @@ main.main-hero-content {
 .variant-images:hover,
 .variant-images:active,
 .variant-images:focus {
-  border: 2px solid #171717;
+  border: 2px solid #141414;
   border-radius: 4px;
 }
 
@@ -686,7 +685,7 @@ main.main-hero-content {
   border-radius: 4px;
   background-color: transparent;
   padding: 0 1rem;
-  border: 2px solid #171717;
+  border: 2px solid #141414;
 }
 
 .sizes-dropdown,
@@ -700,7 +699,7 @@ main.main-hero-content {
 }
 
 .sizes-dropdown {
-  color: #171717;
+  color: #141414;
   width: 100%;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -716,12 +715,12 @@ main.main-hero-content {
 }
 
 .add-to-cart {
-  background-color: #171717;
+  background-color: #141414;
   color: #ededed;
 }
 
 .drop-arrow {
-  color: #171717;
+  color: #141414;
   position: absolute;
   font-size: 1.65rem;
   top: 50%;
@@ -869,7 +868,7 @@ main.main-hero-content {
   align-items: center;
   height: fit-content;
   width: 100%;
-  border: 1px solid #171717;
+  border: 1px solid #141414;
   border-radius: 4px;
 }
 
@@ -889,7 +888,7 @@ main.main-hero-content {
   width: 30%;
   aspect-ratio: 1 / 1;
   position: relative;
-  border-right: 1px solid #171717;
+  border-right: 1px solid #141414;
 }
 
 .cart-item-image {
@@ -934,7 +933,7 @@ main.main-hero-content {
   display: flex;
   align-content: center;
   justify-content: center;
-  border: 1px solid #171717;
+  border: 1px solid #141414;
   width: fit-content;
   border-radius: 4px;
 }
@@ -951,8 +950,8 @@ main.main-hero-content {
 }
 
 .cart-item-quantity {
-  border-right: 1px solid #171717;
-  border-left: 1px solid #171717;
+  border-right: 1px solid #141414;
+  border-left: 1px solid #141414;
   padding: 0 .25rem;
 }
 
@@ -980,7 +979,7 @@ main.main-hero-content {
   border-radius: 4px;
   padding: 0 .5rem;
   background-color: #ffffff;
-  color: #171717;
+  color: #141414;
   border: 1px solid rgba(0, 0, 0, .25);
 }
 
@@ -992,7 +991,7 @@ main.main-hero-content {
   height: 50px;
   font-weight: bold;
   border-radius: 4px;
-  background-color: #171717;
+  background-color: #141414;
   color: #ededed;
 }
 
@@ -1172,7 +1171,7 @@ main.main-hero-content {
 label, 
 input::placeholder, 
 textarea::placeholder {
-  color: #171717;
+  color: #141414;
   opacity: .675;
 }
 
@@ -1182,7 +1181,7 @@ label {
 }
 
 input, textarea {
-  border: 1px solid #171717;
+  border: 1px solid #141414;
   border-radius: 4px;
   width: 100%;
   font-size: .675rem;
@@ -1204,7 +1203,7 @@ textarea::placeholder {
 }
 
 #contact-submit {
-  background-color: #171717;
+  background-color: #141414;
   color: #ededed;
   height: 50px;
   border-radius: 4px;
@@ -1212,9 +1211,9 @@ textarea::placeholder {
 }
 
 #contact-submit:hover {
-  border: 1px solid #171717;
+  border: 1px solid #141414;
   background-color: #ededed;
-  color: #171717;
+  color: #141414;
   height: 50px;
   border-radius: 4px;
 }
