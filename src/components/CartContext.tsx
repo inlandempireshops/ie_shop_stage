@@ -9,6 +9,8 @@ type CartContextType = {
   cartId: string | null;
   cartData: LiveCartResponseType | null;
   loading: boolean;
+  isCartOpen: boolean;
+  setIsCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
   addItem: (variantId: string, sellingPlanId?: string) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
   updateQuantity: (lineId: string, currentQuantity: number, action: "increase" | "decrease") => Promise<void>;
@@ -17,6 +19,7 @@ type CartContextType = {
 export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export default function CartContextProvider({ children }: {children: ReactNode}) {
+  const [isCartOpen, setIsCartOpen] = useState<boolean>(false);
   const [cartId, setCartId] = useState<string | null>(null);
   const [cartData, setCartData] = useState<LiveCartResponseType | null>(null)
   const [loading, setLoading] = useState(false);
@@ -119,7 +122,7 @@ export default function CartContextProvider({ children }: {children: ReactNode})
   }
 
   return(
-    <CartContext.Provider value={{ cartId, cartData, loading, addItem, removeItem, updateQuantity }}>
+    <CartContext.Provider value={{ isCartOpen, setIsCartOpen, cartId, cartData, loading, addItem, removeItem, updateQuantity }}>
       {children}
     </CartContext.Provider>
   )

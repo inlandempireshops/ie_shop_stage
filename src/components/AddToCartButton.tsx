@@ -9,7 +9,7 @@ type AddToCartProps = {
 };
 
 export default function AddToCartButton({ variantId, disabled, sellingPlanId}: AddToCartProps) {
-  const {addItem, loading} = useCart();
+  const {setIsCartOpen, addItem, loading} = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [success, setSucces] = useState(false);
 
@@ -22,6 +22,7 @@ export default function AddToCartButton({ variantId, disabled, sellingPlanId}: A
     try {
       await addItem(variantId, sellingPlanId);
       setSucces(true);
+      setIsCartOpen(true);
       
       setTimeout(() => {
         setSucces(false);
