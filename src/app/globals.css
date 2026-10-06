@@ -810,7 +810,7 @@ main.main-hero-content {
   top: 0;
   width: 90svw;
   left: 0;
-  height: 100svh;
+  height: 100dvh;
   background-color: #ededed;
   z-index: 100;
   padding: 1em;
