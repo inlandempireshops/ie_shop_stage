@@ -704,7 +704,6 @@ main.main-hero-content {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  z-index: 1;
 }
 
 .sizes-dropdown:active, 
@@ -813,7 +812,7 @@ main.main-hero-content {
   left: 0;
   height: 100svh;
   background-color: #ededed;
-  z-index: 5;
+  z-index: 100;
   padding: 1em;
   overflow-y: scroll;
   
