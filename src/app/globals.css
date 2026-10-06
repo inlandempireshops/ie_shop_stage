@@ -244,10 +244,8 @@ main.main-hero-content {
 }
 
 .splash-image {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-  height: 100%;
-  width: 100%;
 }
 
 .home-buttons {
@@ -257,7 +255,7 @@ main.main-hero-content {
   width: 100%;
   z-index: 2;
   position: relative;
-
+  
   opacity: 0;
   animation: cleanFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1)  0.4s forwards;
 }
@@ -479,7 +477,12 @@ main.main-hero-content {
 }
 
 .shop-hat-title {
+  color: rgba(0, 0, 0, 1);
+}
+
+.shop-hat-price {
   color: rgba(0, 0, 0, .5);
+  font-size: .875rem;
 }
 
 .shop-hat-image-container {
@@ -519,6 +522,10 @@ main.main-hero-content {
 
   .shop-hat-info {
     font-size: 1.25rem;
+  }
+
+  .shop-hat-price {
+    font-size: 1rem;
   }
 }
 

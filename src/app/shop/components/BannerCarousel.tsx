@@ -70,6 +70,7 @@ export default function BannerCarousel({ autoSlide = 3000 }) {
           className="banner-image"
           placeholder="blur"
           fill
+          loading="eager"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
@@ -85,6 +86,7 @@ export default function BannerCarousel({ autoSlide = 3000 }) {
           alt={image.alt}
           className="banner-image"
           loading="eager"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
     )
