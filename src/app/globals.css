@@ -1005,6 +1005,14 @@ main.main-hero-content {
   font-size: .875rem;
 }
 
+.pre-order-text {
+  color: #d97706;
+  font-size: .75rem;
+  font-weight: 600;
+  margin-top: 2px;
+  width: 100%;
+}
+
 .cart-item-price {
   font-weight: bold;
   font-size: .875rem;
