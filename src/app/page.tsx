@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import whiteLogo from "~/public/images/white-ie-logo.png";
 import splashImage from "~/public/images/splash-image.png";
+import { FaInstagram } from 'react-icons/fa';
 
 export default function Home() {
   const [isSplashActive, setIsSplashActive] = useState(true);
@@ -76,6 +77,15 @@ export default function Home() {
               className="link-btn"
             >
               Contact
+            </Link>
+            <Link 
+              id="social-media-btn"
+              href={`https://www.instagram.com/theie.shop`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="link-btn"
+              >
+                Instagram
             </Link>
           </div>)}
         </div>

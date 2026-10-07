@@ -2,7 +2,7 @@
 import { useState, useEffect, use } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import { ShopifyProductType } from "@/types/shopifyTypes";
 import { notFound } from "next/navigation";
@@ -48,8 +48,10 @@ export default function ProductClient({ product }: ShopifyProductType) {
 
   const [imageIndex, setImageIndex] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string>("");
-
+  const [isTabOpen, setIsTabOpen] = useState<boolean>(true);
+  
   const title = product.title;
+  const description = product.descriptionHtml;
   const mainProductImage = product.images?.edges[imageIndex]?.node;
   const variantList = (product.variants?.edges || []) as ProductVariantType[];
   const hasMultipleSizes = product.options[0]?.values && product.options[0].values.length > 0;
@@ -93,6 +95,10 @@ export default function ProductClient({ product }: ShopifyProductType) {
       </div>
     )
   });
+
+  function handleAccordian() {
+
+  }
 
   return(
     <main id="main-product-content">
@@ -163,6 +169,20 @@ export default function ProductClient({ product }: ShopifyProductType) {
               </p>
             )
           }
+        </div>
+        <div className="product-description-container">
+          <div 
+            className="product-description-title"
+            onClick={() => setIsTabOpen((prev) => !prev)}
+          >
+            <h3 className="product-description-header">Description</h3>
+            {isTabOpen ? <IoMdArrowDropup className="accordian-drop-arrow"/> : <IoMdArrowDropdown className="accordian-drop-arrow"/>}
+          </div>
+          <div 
+            className={`product-description ${!isTabOpen && "close"}`}
+            dangerouslySetInnerHTML={{__html: description}}
+          >
+          </div>
         </div>
       </div>
     </main>

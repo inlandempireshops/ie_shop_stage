@@ -4,6 +4,7 @@ export const GET_PRODUCT_QUERY = `
       id
       title
       description
+      descriptionHtml
       options {
         name
         values

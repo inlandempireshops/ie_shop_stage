@@ -7,7 +7,7 @@ export type ShopifySeoType = {
 
 export type ShopifyImageType = {
   url: string;
-  altText: string
+  altText: string;
 };
 
 export type ShopifyVariantType = {
@@ -44,6 +44,7 @@ export type ShopifyProductFieldsType = {
   title: string;
   handle: string;
   description: string;
+  descriptionHtml: string;
   seo: ShopifySeoType;
   options: Array<{
     name: string;
