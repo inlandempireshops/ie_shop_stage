@@ -96,10 +96,6 @@ export default function ProductClient({ product }: ShopifyProductType) {
     )
   });
 
-  function handleAccordian() {
-
-  }
-
   return(
     <main id="main-product-content">
       <Link

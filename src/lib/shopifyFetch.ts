@@ -1,11 +1,12 @@
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN;
 const accessToken = process.env.NEXT_PUBLIC_STOREFRONT_ACCESS_TOKEN;
 const shopifyVersion = process.env.NEXT_PUBLIC_SHOPIFY_API_VERSION;
-import { ShopifyCartType, LiveCartResponseType } from "@/types/shopifyTypes";
+import { ShopifyCartType, LiveCartResponseType, ShopifyLayoutFieldsType, ShopifyLayoutType } from "@/types/shopifyTypes";
 import { CREATE_CART_MUTATION, ADD_TO_CART_MUTATION, 
   REMOVE_FROM_CART_MUTATION, UPDATE_CART_QUANTITY_MUTATION 
 } from "@/graphql/mutations/shopifyCart";
 import { GET_CART_QUERY } from "@/graphql/queries/cart";
+import { GET_LAYOUT_QUERY } from "@/graphql/queries/layout";
 
 // Fetch Products and Collections
 export async function shopifyFetch<T>({ query, variables }: { query: string, variables?: any }): Promise<{ data: T} | never> {
@@ -114,4 +115,18 @@ export async function updateCartQuantity(cartId: string, lineId: string, quantit
     },
   });
   return response.data.cartLinesUpdate.cart;
+}
+
+// Fetch Global Shop and Policy Metadata
+export async function getShopLayoutData(): Promise<ShopifyLayoutFieldsType | null> {
+  try {
+    const response = await shopifyFetch<ShopifyLayoutType>({
+      query: GET_LAYOUT_QUERY,
+    });
+    
+    return response?.data?.shop || null;
+  } catch(error) {
+    console.error("Error executing layout query:", error);
+    return null;
+  }
 }

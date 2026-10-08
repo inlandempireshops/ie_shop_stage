@@ -151,3 +151,25 @@ export type LiveCartResponseType = {
     }>
   };
 }
+
+export type ShopifyShopPolicyType = {
+  id: string;
+  title: string;
+  body: string;
+  url: string;
+};
+
+export type ShopifyLayoutFieldsType = {
+  name: string;
+  primaryDomain: {
+    url: string;
+  };
+  termsOfService: ShopifyShopPolicyType | null;
+  privacyPolicy: ShopifyShopPolicyType | null;
+  refundPolicy: ShopifyShopPolicyType | null;
+  shippingPolicy: ShopifyShopPolicyType | null;
+};
+
+export type ShopifyLayoutType = {
+  shop: ShopifyLayoutFieldsType;
+};

@@ -1,0 +1,33 @@
+#not-found-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  gap: 2rem;
+  padding: 0 4rem;
+}
+
+#not-found-wrapper h1 {
+  font-size: 5rem;
+  display: flex;
+  text-align: center;
+  margin: 0;
+  line-height: 5rem;
+}
+
+#not-found-wrapper p {
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.error-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 200px;
+  border-radius: 4px;
+  background-color: #171717;
+  color: #ededed;
+}
